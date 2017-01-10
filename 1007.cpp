@@ -11,71 +11,53 @@ using namespace std;
 
 int main() {
 	int temp=0;
-	int lasttemp = 0;
 	int sum = 0;
 	int N ;
 	int max =0;
 
-	int negtive = 0;
-	int pstart = 0;
-	int pend = 0;
-	int maxpstart = 0;
+	int finalstart = 0;
+	int finalend = 0;
+	int tempstart = 0;
+	int tempend = 0;
+
 	cin >>N;
 	cin.get();
 
+	int *input = new int[N];
+	for(int i = 0 ;i<N ;i++)
+	{
+		cin >>input[i];
+	}
+	finalend = N-1;
 	for(int i = 0;i<N;i++)
 	{
-		lasttemp = temp;
-	    cin >>temp;
+	    temp = input[i];
 
 
-	    if(temp < 0 && sum <=0 )
+
+	    if(sum >= 0)
 	    {
-	         pstart = i ;
+	    	 sum+= temp;
+	    	 tempend = i;
 	    }
-	    else if(lasttemp!= 0 && temp == 0 && sum <=0)
-	    {
-	    	 pstart =  i;
-	    }
-	    else if(temp >0 && sum <=0)
-	    {
-	    	 pstart = i ;
-	    }
-
-	    if(temp < 0)
-	    {
-	    	negtive++;
-	    }
-
-	    sum += temp;
-
-
-	    if(sum <0)
+	    else
 	    {
 	    	 sum = 0;
+	    	 sum+= temp;
+	         tempstart = i;
+	         tempend = i;
+
 	    }
 
+	    if(max <sum  || (sum == 0 && finalend == N-1))
+	    {
+	    	max = sum;
+	    	finalend = tempend;
+	    	finalstart = tempstart;
+	    }
 
-		if(max < sum )
-		{
-			max = sum;
-			maxpstart = pstart;
-			pend = i;
-		}
-		else if(max == sum && lasttemp !=0&&temp == 0 && pend == 0 )//add
-		{
-			maxpstart = pstart;
-			pend =i;
-		}
 	}
-	if(N  == negtive && N !=0)
-	{
-		cout <<max<<" "<< 0<<" "<<(N-1)<<endl;
-	}
-	else
-	{
-		 cout <<max<<" "<< maxpstart<<" "<<pend<<endl;
-	}
+	cout << max <<" "<<input[finalstart]<<" "<< input[finalend];
 
 	return 0;
 }
