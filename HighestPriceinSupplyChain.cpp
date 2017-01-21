@@ -10,11 +10,10 @@ using namespace std;
 #include <math.h>
 //相当于统计树的深度，最深的有几条
 //采用BFS
-//
+//使用一个二维数组来表示父亲孩子
 int N;
 float P;
 float r;
-vector<int>chain;
 queue <int>buffer;
 
 
@@ -27,32 +26,35 @@ int main()
 	int height=0;
 	int length = 0;
 	int store_length = 0;
+
 	cin >> N >> P >> r;
+
+	vector<vector<int >> martix(N);
 	cin.get();
 	for (int i = 0; i < N; i++)
 	{
 		cin >> input;
-		chain.push_back(input);
 		if (input == -1)
 		{
-			buffer.push(i);//store the root
+			buffer.push(i);
+		}
+		else
+		{
+			martix[input].push_back(i);
 		}
 	} 
 	end = buffer.back();
+
 	while (buffer.empty() == false)
 	{
 		aim_find = buffer.front();
 	
-		
-		for (int i = 0; i < N; i++)
+		for (vector<int>::iterator iter = martix[aim_find].begin(); iter != martix[aim_find].end(); iter++)
 		{
-			if (chain[i] == aim_find)
-			{
-				buffer.push(i);
-				length++;
-			}
+			buffer.push(*iter);
+			length++;
 		}
-		
+
 		buffer.pop();	
 
 		if (aim_find == end)
