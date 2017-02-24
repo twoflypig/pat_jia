@@ -1,6 +1,6 @@
-// 1021.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// 1021.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
-//ÔõÃ´·ÃÎÊ±ßÄØ£¿
+//æ€ä¹ˆè®¿é—®è¾¹å‘¢ï¼Ÿ
 #include "stdafx.h"
 #include <iostream>
 #include <list>
@@ -13,7 +13,7 @@ vector<bool>tage;
 vector<int >connect;
 int N;
 int v1, v2;
-int hadcheck = 0;//ÒÑ¾­·ÃÎÊµÄ½ÚµãÊı
+int hadcheck = 0;//å·²ç»è®¿é—®çš„èŠ‚ç‚¹æ•°
 int temleng = -1;
 int maxleng = 0;
 int connectindex = 1;
@@ -21,9 +21,9 @@ int addflag = 0;
 void dfs(int index, int & number, int deep)
 {
 	tage[index] = true;
-	number++;//¼ÇÂ¼ËùÓĞÒÑ¾­·ÃÎÊ¹ıµÄÊı
+	number++;//è®°å½•æ‰€æœ‰å·²ç»è®¿é—®è¿‡çš„æ•°
 	deep++;
-	for (int i = 0; i < G[index].size(); i++)//¶Ôindex½ÚµãµÄº¢×Ó½øĞĞ·ÃÎÊ
+	for (int i = 0; i < G[index].size(); i++)//å¯¹indexèŠ‚ç‚¹çš„å­©å­è¿›è¡Œè®¿é—®
 	{
 		if (tage[G[index][i]] == false)
 		{
@@ -33,7 +33,6 @@ void dfs(int index, int & number, int deep)
 	temleng = max(temleng, deep);
 	deep--;
 }
-int find 
 int main()
 {
 	cin >> N;
@@ -41,15 +40,15 @@ int main()
 	length.resize( N + 1);
 	tage.resize(N + 1);
 	connect.resize(N + 1);
-	for (int i = 0; i < N-1; i++)//×¢Òâ±àºÅ´Ó1-N
+	for (int i = 0; i < N-1; i++)//æ³¨æ„ç¼–å·ä»1-N
 	{
 		cin >> v1 >> v2;
 		G[v1].push_back(v2);
 		G[v2].push_back(v1);
 	}
-	//¿ªÊ¼dfs
-	//Á¬Í¬Í¼ÊÇÒ»´Îdfs¾Í¿ÉÒÔ·ÃÎÊÍê£¬¶ø¶à¸öÁ¬Í¨Í¼Ò»´Î·ÃÎÊ²»Íê
-	//Ò»´Î·ÃÎÊÊ±¼ÇÂ¼ÒÑ¾­·ÃÎÊµÄ¸öÊı
+	//å¼€å§‹dfs
+	//è¿åŒå›¾æ˜¯ä¸€æ¬¡dfså°±å¯ä»¥è®¿é—®å®Œï¼Œè€Œå¤šä¸ªè¿é€šå›¾ä¸€æ¬¡è®¿é—®ä¸å®Œ
+	//ä¸€æ¬¡è®¿é—®æ—¶è®°å½•å·²ç»è®¿é—®çš„ä¸ªæ•°
 	int deep;
 	for (int i = 1; i <= N; i++)
 	{
@@ -58,11 +57,11 @@ int main()
 		deep = 0;
 		dfs(i, hadcheck, deep);
 		addflag = 0;
-		for (int j = 1; j <= N; j++)//ÓÃ²¢²é¼¯µÄË¼Ïë
+		for (int j = 1; j <= N; j++)//ç”¨å¹¶æŸ¥é›†çš„æ€æƒ³
 		{
 			if (hadcheck <N)
 			{
-				if ( (i == 1 && tage[j] == true) ||(tage[j] == true && connect[j]==0 ))//µÚÒ»´Î
+				if ( (i == 1 && tage[j] == true) ||(tage[j] == true && connect[j]==0 ))//ç¬¬ä¸€æ¬¡
 				{
 					addflag = 1;
 					connect[j] = connectindex;
